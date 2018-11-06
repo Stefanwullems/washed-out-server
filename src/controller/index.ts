@@ -1,2 +1,2 @@
-import FundController from "./FundController";
-export default [FundController];
+import UserController from "./UserController";
+export default [UserController];

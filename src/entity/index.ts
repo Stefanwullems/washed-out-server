@@ -1,2 +1,2 @@
-import Fund from "./Fund";
-export default [Fund];
+import User from "./User";
+export default [User];
