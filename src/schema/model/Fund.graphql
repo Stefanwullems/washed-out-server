@@ -1,0 +1,14 @@
+type Fund {
+  name: String
+  manager: String
+  assetClass: String
+  size: Int
+  status: String
+  region: String
+  impactTheme: String
+  impactRating: Int
+  description: String
+  SDG_1: String
+  SDG_2: String
+  SDG_3: String
+}
