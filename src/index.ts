@@ -1,6 +1,5 @@
 // src/index.js
 import { bootstrap } from "vesper";
-
 import controllers from "./controller";
 import entities from "./entity";
 
