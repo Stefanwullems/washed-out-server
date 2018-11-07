@@ -1,0 +1,7 @@
+type Item {
+  id: Int
+  type: String
+  material: String
+  specifications: String
+  user: User
+}

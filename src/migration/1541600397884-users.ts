@@ -6,7 +6,7 @@ import getGeolocation, {
 } from "../scripts/geolocation";
 import * as bcrypt from "bcryptjs";
 
-export class user1541581077372 implements MigrationInterface {
+export class users1541600397884 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     await createQueryBuilder()
       .insert()
@@ -29,17 +29,17 @@ export class user1541581077372 implements MigrationInterface {
             }
           }),
           createUser({
-            fullName: "Mtefan Bullems",
+            fullName: "Yuga Wicaksono",
             email: "mtefanbullems1998@gmail.com",
             password: "password",
-            bio: "Hi, I'm Mtefan",
+            bio: "Hi, I'm Yuga",
             picture:
               "https://lh3.googleusercontent.com/-ujrTwbBejaA/UrnMCmdEZyE/AAAAAAAAAHU/JuXmkxujrTYBHz6-AXaUzNF7PbWORiL1QCEwYCg/w163-h110-p/ProfilePhotos02",
             locationInput: {
-              street: "crocusstraat",
-              houseNumber: "1",
-              postalCode: "2071",
-              city: "santpoort-noord",
+              street: "lingestraat",
+              houseNumber: "46",
+              postalCode: "2314TJ",
+              city: "leiden",
               country: "the netherlands"
             }
           })

@@ -1,0 +1,7 @@
+type ServiceRequest {
+  from: User
+  to: User
+  items: [Item]
+  completed: Boolean
+  paid: Boolean
+}
