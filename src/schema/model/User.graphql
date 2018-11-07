@@ -6,4 +6,6 @@ type User {
   picture: String
   location: Location
   items: [Item]
+  createdRequests: [ServiceRequest]
+  recievedRequests: [ServiceRequest]
 }

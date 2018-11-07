@@ -4,17 +4,27 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   ManyToMany,
-  JoinTable
+  JoinTable,
+  ManyToOne
 } from "typeorm";
 import Item from "./Item";
+import User from "./User";
 
 @Entity()
 export default class ServiceRequest extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 
+  @ManyToOne(() => User, user => user.createdRequests)
   @JoinTable()
-  @ManyToMany(() => Item, item => item.serviceRequests)
+  from: User;
+
+  @ManyToOne(() => User, user => user.recievedRequests)
+  @JoinTable()
+  to: User;
+
+  @JoinTable()
+  @ManyToMany(() => Item)
   items: Item[];
 
   @Column("boolean", { nullable: false, default: false })

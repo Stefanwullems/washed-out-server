@@ -1,11 +1,16 @@
-import { MigrationInterface, QueryRunner, createQueryBuilder } from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  createQueryBuilder,
+  getConnection
+} from "typeorm";
 import ServiceRequest from "../entity/ServiceRequest";
 import Item from "../entity/Item";
 import User from "../entity/User";
 
-export class request1541588477881 implements MigrationInterface {
+export class requests1541600486279 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
-    createQueryBuilder()
+    await createQueryBuilder()
       .insert()
       .into(ServiceRequest)
       .values([
@@ -14,14 +19,16 @@ export class request1541588477881 implements MigrationInterface {
             { type: "pants", material: "denim" },
             { type: "shirt", material: "silk", specifications: "not too hot" }
           ],
-          userId: 1
+          fromId: 1,
+          toId: 2
         }),
         await createRequest({
           items: [
             { type: "trousers", material: "denim" },
             { type: "shirt", material: "silk", specifications: "not too hot" }
           ],
-          userId: 2
+          fromId: 2,
+          toId: 1
         })
       ]);
   }
@@ -37,16 +44,24 @@ interface IItem {
 
 interface ICreateServiceRequestParams {
   items: IItem[];
-  userId: number;
+  fromId: number;
+  toId: number;
 }
 
-async function createRequest({ items, userId }: ICreateServiceRequestParams) {
-  const user = await User.findOne(userId);
+async function createRequest({
+  items,
+  fromId,
+  toId
+}: ICreateServiceRequestParams) {
+  const from = await User.findOne(fromId);
+  const to = await User.findOne(toId);
   return ServiceRequest.create({
     items: await Promise.all<Item>(
       items.map(async item => {
-        return Item.create({ ...item, user }).save();
+        return Item.create({ ...item, user: from }).save();
       })
-    )
+    ),
+    from,
+    to
   }).save();
 }
