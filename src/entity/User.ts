@@ -7,7 +7,7 @@ import {
   OneToOne,
   OneToMany
 } from "typeorm";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs"
 import { MinLength, IsString, IsEmail } from "class-validator";
 import { Exclude } from "class-transformer";
 import Location from "./Location";
