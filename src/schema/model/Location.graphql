@@ -1,0 +1,11 @@
+type Location {
+  id: Int
+  streetName: String
+  houseNumber: Int
+  addition: String
+  postalCode: String
+  city: String
+  country: String
+  latitude: Float
+  longitude: Float
+}
