@@ -5,4 +5,5 @@ type User {
   bio: String
   picture: String
   location: Location
+  services:Services
 }

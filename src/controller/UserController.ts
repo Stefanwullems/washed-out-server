@@ -4,7 +4,7 @@ import User from "../entity/User";
 @Controller()
 export default class UserController {
   @Query()
-  allUser() {
+  allUsers() {
     return User.find();
   }
 

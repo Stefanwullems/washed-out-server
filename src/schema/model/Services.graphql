@@ -1,0 +1,6 @@
+type Services {
+  id:Int,
+  washing:Boolean,
+  drying:Boolean,
+  ironing:Boolean,
+}
