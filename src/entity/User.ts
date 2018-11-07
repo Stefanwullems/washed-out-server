@@ -1,3 +1,6 @@
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import * as bcrypt from "bcryptjs"
+
 import {
   Entity,
   PrimaryGeneratedColumn,

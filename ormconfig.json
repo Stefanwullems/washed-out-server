@@ -3,9 +3,9 @@
   "host": "localhost",
   "port": 5432,
   "username": "postgres",
-  "password": "password",
+  "password": "secret",
   "database": "washedout",
-  "synchronize": false,
+  "synchronize": true,
   "entities": ["target/entity/**/*.js"],
   "migrations": ["target/migration/*.js"],
   "cli": {
