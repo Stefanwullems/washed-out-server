@@ -70,6 +70,7 @@ async function createUser({
   return User.create({
     ...userInput,
     location,
-    password: await bcrypt.hash(password, 10)
+    password: await bcrypt.hash(password, 10),
+    items: []
   }).save();
 }

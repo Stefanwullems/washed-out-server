@@ -4,12 +4,14 @@ import {
   Column,
   BaseEntity,
   JoinColumn,
-  OneToOne
+  OneToOne,
+  OneToMany
 } from "typeorm";
 import * as bcrypt from "bcrypt";
 import { MinLength, IsString, IsEmail } from "class-validator";
 import { Exclude } from "class-transformer";
 import Location from "./Location";
+import Item from "./Item";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -42,6 +44,10 @@ export default class User extends BaseEntity {
   @OneToOne(() => Location)
   @JoinColumn()
   location: Location;
+
+  @OneToMany(() => Item, item => item.user)
+  @JoinColumn()
+  items: Item[];
 
   async setPassword(rawPassword: string) {
     const hash = await bcrypt.hash(rawPassword, 10);
