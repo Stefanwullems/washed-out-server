@@ -13,8 +13,7 @@ export class AuthController {
           throw new Error("Wrong password");
       }
 
-      const token = jwt.sign({ id: user.id }, secret , { expiresIn: '1h' });
-
+      const token = jwt.sign({ id: user.id }, secret , { expiresIn: '4h' });
       return token;
   }
 }

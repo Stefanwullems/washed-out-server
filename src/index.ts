@@ -28,7 +28,7 @@ bootstrap({
 
     container.set(User, currentUser);
   },
-authorizationChecker: (roles: string[], action) => {
+authorizationChecker: (container, action) => {
     const currentUser = action.container.get(User);
     if(currentUser.id === undefined) {
       throw new Error("The current user doesn't set");
