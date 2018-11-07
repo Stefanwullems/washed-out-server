@@ -27,6 +27,21 @@ export class user1541581077372 implements MigrationInterface {
               city: "santpoort-noord",
               country: "the netherlands"
             }
+          }),
+          createUser({
+            fullName: "Mtefan Bullems",
+            email: "mtefanbullems1998@gmail.com",
+            password: "password",
+            bio: "Hi, I'm Mtefan",
+            picture:
+              "https://lh3.googleusercontent.com/-ujrTwbBejaA/UrnMCmdEZyE/AAAAAAAAAHU/JuXmkxujrTYBHz6-AXaUzNF7PbWORiL1QCEwYCg/w163-h110-p/ProfilePhotos02",
+            locationInput: {
+              street: "crocusstraat",
+              houseNumber: "1",
+              postalCode: "2071",
+              city: "santpoort-noord",
+              country: "the netherlands"
+            }
           })
         ])
       );
