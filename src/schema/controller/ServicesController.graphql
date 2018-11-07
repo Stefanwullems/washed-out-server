@@ -1,9 +1,5 @@
 
-type Query {
-  getUserServices(userId:Int):Services
-}
-
 type Mutation{
-  setServices(id:Int,washing:Boolean,drying:Boolean,ironing:Boolean,userId): Services
+  setServices(id:Int, washing?:String, drying?:String, ironing?:String, user:User): Services
 }
 

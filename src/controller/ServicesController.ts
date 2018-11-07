@@ -1,26 +1,23 @@
-import { Controller, Query, Mutation } from "vesper";
-import Services from "../entity/Services";
-import User from "../entity/User"
-
-
+import { Controller, Mutation, Authorized } from "vesper";
+import User from "../entity/User";
 
 @Controller()
 export default class ServicesController {
+  constructor(
+    private currentUser?: CurrentUser,
+  ) {}
 
-  @Query()
-  getUserServices(_,{userId}) {
-    return Services.findOne(userId);
-  }
 
+  @Authorized()
   @Mutation()
-  async setServices(args){
+  async setServices(args) {
+    const {password,...rest} = args
+    const entity = User.create(rest)
+    await entity.setPassword(password)
+    const user = await entity.save()
 
-    const checkUser =await User.findOne() //get current user 
-    if (!checkUser) throw new Error("the user does not exist")
-    
-    // TODO make this function works 
-
-
+    return user
   }
+   
 
 }

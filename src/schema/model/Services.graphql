@@ -3,5 +3,4 @@ type Services {
   washing:Boolean,
   drying:Boolean,
   ironing:Boolean,
-  userId:Int
 }

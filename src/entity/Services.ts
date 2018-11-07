@@ -18,6 +18,6 @@ export default class Services extends BaseEntity {
 
   @OneToOne(()=>User)
   @JoinColumn()
-  user:number
+  user:User
 
 }
