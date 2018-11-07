@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
-import * as bcrypt from "bcrypt"
+import * as bcrypt from "bcryptjs"
 import {
   MinLength,
   IsString,
