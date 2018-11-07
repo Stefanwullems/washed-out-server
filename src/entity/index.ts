@@ -1,2 +1,3 @@
 import User from "./User";
-export default [User];
+import Services from "./Services"
+export default [User,Services];

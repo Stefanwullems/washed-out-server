@@ -1,2 +1,4 @@
 import UserController from "./UserController";
-export default [UserController];
+import ServicesController from "./ServicesController";
+
+export default [UserController, ServicesController];
