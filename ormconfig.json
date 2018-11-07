@@ -5,7 +5,7 @@
   "username": "postgres",
   "password": "secret",
   "database": "washedout",
-  "synchronize": true,
+  "synchronize": false,
   "entities": ["target/entity/**/*.js"],
   "migrations": ["target/migration/*.js"],
   "cli": {
