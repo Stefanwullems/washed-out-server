@@ -8,5 +8,6 @@ type User {
   items: [Item]
   createdRequests: [ServiceRequest]
   recievedRequests: [ServiceRequest]
-  services:Services
+  services: Services
+  token: String
 }

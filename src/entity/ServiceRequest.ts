@@ -5,7 +5,9 @@ import {
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
-  ManyToOne
+  ManyToOne,
+  BeforeInsert,
+  BeforeUpdate
 } from "typeorm";
 import Item from "./Item";
 import User from "./User";
@@ -27,9 +29,28 @@ export default class ServiceRequest extends BaseEntity {
   @ManyToMany(() => Item)
   items: Item[];
 
+  @Column("text", { nullable: true })
+  specifications: string;
+
   @Column("boolean", { nullable: false, default: false })
   completed: boolean;
 
   @Column("boolean", { nullable: false, default: false })
   paid: boolean;
+
+  @Column("bigint", { nullable: false })
+  createdAt: number;
+
+  @BeforeInsert()
+  setCreatedAt() {
+    this.createdAt = Math.floor(Date.now() / 1000);
+  }
+
+  @Column("bigint", { nullable: true })
+  updatedAt: number;
+
+  @BeforeUpdate()
+  setUpdatedAt() {
+    this.updatedAt = Math.floor(Date.now() / 1000);
+  }
 }

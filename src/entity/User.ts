@@ -5,14 +5,17 @@ import {
   BaseEntity,
   JoinColumn,
   OneToOne,
-  OneToMany
+  OneToMany,
+  BeforeInsert,
+  BeforeUpdate
 } from "typeorm";
-import * as bcrypt from "bcryptjs"
+import * as bcrypt from "bcryptjs";
 import { MinLength, IsString, IsEmail } from "class-validator";
 import { Exclude } from "class-transformer";
 import Location from "./Location";
 import Item from "./Item";
 import ServiceRequest from "./ServiceRequest";
+import Services from "./Services";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -37,6 +40,10 @@ export default class User extends BaseEntity {
   @IsString()
   @Column("text", { nullable: false })
   bio: string;
+
+  @JoinColumn()
+  @OneToOne(() => Services)
+  services: Services;
 
   @IsString()
   @Column("text", { nullable: false })
@@ -65,5 +72,21 @@ export default class User extends BaseEntity {
 
   checkPassword(rawPassword: string): Promise<boolean> {
     return bcrypt.compare(rawPassword, this.password);
+  }
+
+  @Column("bigint", { nullable: false })
+  createdAt: number;
+
+  @BeforeInsert()
+  setCreatedAt() {
+    this.createdAt = Math.floor(Date.now() / 1000);
+  }
+
+  @Column("bigint", { nullable: true })
+  updatedAt: number;
+
+  @BeforeUpdate()
+  setUpdatedAt() {
+    this.updatedAt = Math.floor(Date.now() / 1000);
   }
 }

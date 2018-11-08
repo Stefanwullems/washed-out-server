@@ -3,7 +3,9 @@ import {
   Column,
   BaseEntity,
   PrimaryGeneratedColumn,
-  ManyToOne
+  ManyToOne,
+  BeforeInsert,
+  BeforeUpdate
 } from "typeorm";
 import User from "./User";
 
@@ -23,4 +25,20 @@ export default class Item extends BaseEntity {
 
   @ManyToOne(() => User, user => user.items)
   user: User;
+
+  @Column("bigint", { nullable: false })
+  createdAt: number;
+
+  @BeforeInsert()
+  setCreatedAt() {
+    this.createdAt = Math.floor(Date.now() / 1000);
+  }
+
+  @Column("bigint", { nullable: true })
+  updatedAt: number;
+
+  @BeforeUpdate()
+  setUpdatedAt() {
+    this.updatedAt = Math.floor(Date.now() / 1000);
+  }
 }
