@@ -20,7 +20,8 @@ export class requests1541600486279 implements MigrationInterface {
             { type: "shirt", material: "silk", specifications: "not too hot" }
           ],
           fromId: 1,
-          toId: 2
+          toId: 2,
+          specifications: "I need it done before tomorrow"
         }),
         await createRequest({
           items: [
@@ -46,12 +47,14 @@ interface ICreateServiceRequestParams {
   items: IItem[];
   fromId: number;
   toId: number;
+  specifications?: string;
 }
 
 async function createRequest({
   items,
   fromId,
-  toId
+  toId,
+  specifications
 }: ICreateServiceRequestParams) {
   const from = await User.findOne(fromId);
   const to = await User.findOne(toId);
@@ -62,6 +65,7 @@ async function createRequest({
       })
     ),
     from,
-    to
+    to,
+    specifications
   }).save();
 }

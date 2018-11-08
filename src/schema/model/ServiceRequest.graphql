@@ -4,4 +4,5 @@ type ServiceRequest {
   items: [Item]
   completed: Boolean
   paid: Boolean
+  specifications: String
 }

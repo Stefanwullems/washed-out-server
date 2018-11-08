@@ -5,6 +5,7 @@ import getGeolocation, {
   ISearchGeolocationParams
 } from "../scripts/geolocation";
 import * as bcrypt from "bcryptjs";
+import Services from "../entity/Services";
 
 export class users1541600397884 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
@@ -70,6 +71,7 @@ async function createUser({
   return User.create({
     ...userInput,
     location,
-    password: await bcrypt.hash(password, 10)
+    password: await bcrypt.hash(password, 10),
+    services: await Services.create().save()
   }).save();
 }
