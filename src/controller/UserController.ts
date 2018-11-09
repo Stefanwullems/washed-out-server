@@ -10,6 +10,7 @@ export default class UserController {
 
   @Mutation()
   async signUp(args) {
+    console.log(args);
     const { password, ...rest } = args;
     const entity = User.create(rest);
     await entity.setPassword(password);
