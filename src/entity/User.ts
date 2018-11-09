@@ -38,15 +38,15 @@ export default class User extends BaseEntity {
   password: string;
 
   @IsString()
-  @Column("text", { nullable: false })
-  bio: string;
+  @Column("text", { nullable: true })
+  bio?: string;
 
   @JoinColumn()
   @OneToOne(() => Services)
   services: Services;
 
   @IsString()
-  @Column("text", { nullable: false })
+  @Column("text", { nullable: true })
   picture: string;
 
   @OneToOne(() => Location)
