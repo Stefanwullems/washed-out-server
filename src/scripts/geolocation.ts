@@ -6,25 +6,18 @@ const appId = "YKXp7WGeg0GYfDvclA2i"; //process.env.APP_ID
 const appCode = "c7bC2pg6dcKRYGbequ9fSA"; //process.env.APP_CODE
 
 export interface ISearchGeolocationParams {
-  street: string;
-  houseNumber: string;
-  addition?: string;
+  address: string;
   postalCode: string;
   city: string;
   country: string;
 }
 
 export default async function getGeolocation({
-  street,
+  address,
   postalCode,
   city,
-  country,
-  houseNumber,
-  addition
+  country
 }: ISearchGeolocationParams): Promise<Partial<Location>> {
-  const address = addition
-    ? street + " " + houseNumber + addition
-    : street + " " + houseNumber;
   const res = await request
     .get(
       `https://geocoder.api.here.com/6.2/geocode.json?app_id=${appId}&app_code=${appCode}&searchtext=${address}+${postalCode}+${city}+${country}`

@@ -12,14 +12,19 @@ export default class LocationController {
   }
 
   @Mutation()
-  async addLocation(args) {
-    const { userId, ...rest } = args;
+  async setLocation(args) {
+    const { userId, id, ...rest } = args;
 
-    const location = await Location.create(await geoLocation(rest)).save();
+    const location =
+      (await Location.findOne(id)) ||
+      (await Location.create(await geoLocation(rest)).save());
 
     const user = await User.findOne(userId);
+
     user.location = location;
-    user.save();
+    await user.save();
+
+    console.log(user);
 
     return user.location;
   }

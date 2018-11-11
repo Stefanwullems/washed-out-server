@@ -8,8 +8,8 @@ import {
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
-  DeepPartial,
-  FindOneOptions
+  ManyToMany,
+  JoinTable
 } from "typeorm";
 import * as bcrypt from "bcryptjs";
 import { MinLength, IsString, IsEmail } from "class-validator";
