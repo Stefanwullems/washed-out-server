@@ -16,8 +16,12 @@ export class requests1541600486279 implements MigrationInterface {
       .values([
         await createRequest({
           items: [
-            { type: "pants", material: "denim" },
-            { type: "shirt", material: "silk", specifications: "not too hot" }
+            { itemType: "pants", material: "denim" },
+            {
+              itemType: "shirt",
+              material: "silk",
+              specifications: "not too hot"
+            }
           ],
           fromId: 1,
           toId: 2,
@@ -25,8 +29,12 @@ export class requests1541600486279 implements MigrationInterface {
         }),
         await createRequest({
           items: [
-            { type: "trousers", material: "denim" },
-            { type: "shirt", material: "silk", specifications: "not too hot" }
+            { itemType: "trousers", material: "denim" },
+            {
+              itemType: "shirt",
+              material: "silk",
+              specifications: "not too hot"
+            }
           ],
           fromId: 2,
           toId: 1
@@ -38,7 +46,7 @@ export class requests1541600486279 implements MigrationInterface {
 }
 
 interface IItem {
-  type: string;
+  itemType: string;
   material: string;
   specifications?: string;
 }

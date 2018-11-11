@@ -3,7 +3,7 @@ import { Entity, PrimaryColumn, Column, BaseEntity } from "typeorm";
 @Entity()
 export default class Location extends BaseEntity {
   @PrimaryColumn()
-  locationId: string;
+  id: string;
 
   @Column("text", { nullable: false })
   streetName: string;
@@ -17,7 +17,7 @@ export default class Location extends BaseEntity {
   @Column("text", { nullable: false })
   city: string;
 
-  @Column("text", { nullable: true })
+  @Column("text", { nullable: false })
   country: string;
 
   @Column("float", { nullable: false })

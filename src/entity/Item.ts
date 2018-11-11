@@ -15,12 +15,12 @@ export default class Item extends BaseEntity {
   id?: number;
 
   @Column("text", { nullable: false })
-  type: string;
+  itemType: string;
 
-  @Column("text", { nullable: true })
+  @Column("text", { nullable: false, default: "not specified" })
   material: string;
 
-  @Column("text", { nullable: true })
+  @Column("text", { nullable: false, default: "no specifications" })
   specifications: string;
 
   @ManyToOne(() => User, user => user.items)

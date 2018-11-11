@@ -1,0 +1,8 @@
+type Mutation {
+  createServiceRequest(
+    fromId: Int!
+    toId: Int!
+    items: [ItemInput!]!
+    specifications: String
+  ): ServiceRequest
+}
