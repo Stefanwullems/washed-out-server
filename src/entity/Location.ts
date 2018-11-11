@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, BaseEntity, ManyToMany } from "typeorm";
+import { Entity, PrimaryColumn, Column, BaseEntity, OneToMany } from "typeorm";
 import User from "./User";
 
 @Entity()
@@ -26,4 +26,7 @@ export default class Location extends BaseEntity {
 
   @Column("float", { nullable: false })
   longitude: number;
+
+  @OneToMany(() => User, user => user.location)
+  users: User[];
 }
