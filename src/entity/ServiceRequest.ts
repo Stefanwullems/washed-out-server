@@ -29,7 +29,7 @@ export default class ServiceRequest extends BaseEntity {
   @ManyToMany(() => Item)
   items: Item[];
 
-  @Column("text", { nullable: true })
+  @Column("text", { nullable: false, default: "no specifications" })
   specifications: string;
 
   @Column("boolean", { nullable: false, default: false })

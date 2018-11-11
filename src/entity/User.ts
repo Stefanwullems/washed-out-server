@@ -7,7 +7,9 @@ import {
   OneToOne,
   OneToMany,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
+  DeepPartial,
+  FindOneOptions
 } from "typeorm";
 import * as bcrypt from "bcryptjs";
 import { MinLength, IsString, IsEmail } from "class-validator";
@@ -28,7 +30,7 @@ export default class User extends BaseEntity {
   fullName: string;
 
   @IsEmail()
-  @Column("text", { nullable: false })
+  @Column("text", { nullable: false, unique: true })
   email: string;
 
   @IsString()
@@ -38,7 +40,7 @@ export default class User extends BaseEntity {
   password: string;
 
   @IsString()
-  @Column("text", { nullable: true })
+  @Column("text", { nullable: false, default: "" })
   bio?: string;
 
   @JoinColumn()
@@ -46,7 +48,11 @@ export default class User extends BaseEntity {
   services: Services;
 
   @IsString()
-  @Column("text", { nullable: true })
+  @Column("text", {
+    nullable: false,
+    default:
+      "https://www.whittierfirstday.org/wp-content/uploads/default-user-image-e1501670968910.png"
+  })
   picture: string;
 
   @OneToOne(() => Location)
@@ -70,8 +76,10 @@ export default class User extends BaseEntity {
     this.password = hash;
   }
 
-  checkPassword(rawPassword: string): Promise<boolean> {
-    return bcrypt.compare(rawPassword, this.password);
+  async passwordMatches(rawPassword: string): Promise<boolean> {
+    const isMatch = await bcrypt.compare(rawPassword, this.password);
+    if (!isMatch) throw new Error("Wrong password");
+    return true;
   }
 
   @Column("bigint", { nullable: false })

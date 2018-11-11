@@ -32,7 +32,7 @@ export default async function getGeolocation({
     .then(res => res.body.Response.View[0].Result[0].Location)
     .catch(console.error);
   return {
-    locationId: res.LocationId as string,
+    id: res.LocationId as string,
     streetName: res.Address.Street as string,
     houseNumber: res.Address.HouseNumber as string,
     postalCode: res.Address.PostalCode as string,

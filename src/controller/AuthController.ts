@@ -7,13 +7,10 @@ import User from "../entity/User";
 export default class AuthController {
   @Mutation()
   async login({ email, password }) {
-    const user = await User.findOne({ email });
-    if (!user.checkPassword(password)) {
-      throw new Error("Wrong password");
+    const user = await User.findOne({ where: { email } });
+    if (await user.passwordMatches(password)) {
+      const token = jwt.sign({ id: user.id }, secret, { expiresIn: "1h" });
+      return token;
     }
-
-    const token = jwt.sign({ id: user.id }, secret, { expiresIn: "1h" });
-
-    return token;
   }
 }

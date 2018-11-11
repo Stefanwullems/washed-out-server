@@ -1,7 +1,13 @@
 type Item {
-  id: Int
-  type: String
+  id: Int!
+  itemType: String!
+  material: String!
+  specifications: String
+  user: User!
+}
+
+input ItemInput {
+  itemType: String
   material: String
   specifications: String
-  user: User
 }
