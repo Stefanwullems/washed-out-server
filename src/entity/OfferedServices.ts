@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 
 @Entity()
-export default class Services extends BaseEntity {
+export default class OfferedServices extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,6 +20,15 @@ export default class Services extends BaseEntity {
 
   @Column("boolean", { nullable: false, default: false })
   ironing?: boolean;
+
+  @Column("boolean", { nullable: false, default: false })
+  folding?: boolean;
+
+  @Column("boolean", { nullable: false, default: false })
+  delivery?: boolean;
+
+  @Column("boolean", { nullable: false, default: false })
+  pickup?: boolean;
 
   @Column("bigint", { nullable: false })
   createdAt: number;

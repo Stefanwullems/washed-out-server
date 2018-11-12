@@ -14,9 +14,9 @@ import * as bcrypt from "bcryptjs";
 import { MinLength, IsString, IsEmail } from "class-validator";
 import { Exclude } from "class-transformer";
 import Location from "./Location";
-import Item from "./Item";
 import ServiceRequest from "./ServiceRequest";
-import Services from "./Services";
+import OfferedServices from "./OfferedServices";
+import ServiceFees from "./ServiceFees";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -43,8 +43,12 @@ export default class User extends BaseEntity {
   bio?: string;
 
   @JoinColumn()
-  @OneToOne(() => Services)
-  services: Services;
+  @OneToOne(() => OfferedServices)
+  services: OfferedServices;
+
+  @JoinColumn()
+  @OneToOne(() => ServiceFees)
+  serviceFees: ServiceFees;
 
   @IsString()
   @Column("text", {
@@ -57,10 +61,6 @@ export default class User extends BaseEntity {
   @ManyToOne(() => Location, location => location.users)
   @JoinColumn()
   location: Location;
-
-  @OneToMany(() => Item, item => item.user)
-  @JoinColumn()
-  items: Item[];
 
   @OneToMany(() => ServiceRequest, serviceRequest => serviceRequest.from)
   @JoinColumn()

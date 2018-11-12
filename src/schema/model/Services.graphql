@@ -3,4 +3,16 @@ type Services {
   washing: Boolean!
   drying: Boolean!
   ironing: Boolean!
+  folding: Boolean!
+  pickup: Boolean!
+  delivery: Boolean!
+}
+
+input ServicesInput {
+  washing: Boolean
+  drying: Boolean
+  ironing: Boolean
+  folding: Boolean
+  pickup: Boolean
+  delivery: Boolean
 }
