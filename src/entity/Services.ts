@@ -6,12 +6,11 @@ import {
   BeforeInsert,
   BeforeUpdate
 } from "typeorm";
-import User from "./User";
 
 @Entity()
 export default class Services extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @Column("boolean", { nullable: false, default: false })
   washing?: boolean;

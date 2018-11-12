@@ -8,8 +8,7 @@ import {
   OneToMany,
   BeforeInsert,
   BeforeUpdate,
-  DeepPartial,
-  FindOneOptions
+  ManyToOne
 } from "typeorm";
 import * as bcrypt from "bcryptjs";
 import { MinLength, IsString, IsEmail } from "class-validator";
@@ -55,7 +54,7 @@ export default class User extends BaseEntity {
   })
   picture: string;
 
-  @OneToOne(() => Location)
+  @ManyToOne(() => Location, location => location.users)
   @JoinColumn()
   location: Location;
 

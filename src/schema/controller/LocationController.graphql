@@ -1,15 +1,13 @@
 type Mutation {
-  addLocation(
+  setLocation(
     userId: Int!
-    street: String!
+    address: String!
     postalCode: String!
     city: String!
     country: String!
-    houseNumber: String!
-    addition: String
   ): Location
 }
 
 type Query {
-  getLocation(userId: Int): Location
+  getLocation(userId: Int!): Location
 }

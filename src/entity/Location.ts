@@ -1,14 +1,15 @@
-import { Entity, PrimaryColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import User from "./User";
 
 @Entity()
 export default class Location extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
-  @Column("text", { nullable: false })
+  @Column("text", { nullable: true })
   streetName: string;
 
-  @Column("int", { nullable: false })
+  @Column("int", { nullable: true })
   houseNumber: string;
 
   @Column("text", { nullable: false })
@@ -25,4 +26,7 @@ export default class Location extends BaseEntity {
 
   @Column("float", { nullable: false })
   longitude: number;
+
+  @OneToMany(() => User, user => user.location)
+  users: User[];
 }
