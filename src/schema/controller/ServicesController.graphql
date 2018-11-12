@@ -1,6 +1,6 @@
 type Mutation {
   updateServices(
-    userId: Int!
+    id: Int!
     washing: Boolean
     drying: Boolean
     ironing: Boolean
