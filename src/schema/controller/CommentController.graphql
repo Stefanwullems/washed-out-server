@@ -1,0 +1,8 @@
+type Mutation {
+  createComment(
+    fromId: Int!
+    toId: Int!
+    content: String!
+    rating: Float
+  ): Comment
+}

@@ -5,6 +5,7 @@ import ServiceRequest from "./ServiceRequest";
 import OfferedServices from "./OfferedServices";
 import RequestedServices from "./RequestedServices";
 import ServiceFees from "./ServiceFees";
+import Comment from "./Comment";
 export default [
   ServiceFees,
   OfferedServices,
@@ -12,5 +13,6 @@ export default [
   User,
   Location,
   Item,
-  ServiceRequest
+  ServiceRequest,
+  Comment
 ];

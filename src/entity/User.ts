@@ -17,6 +17,7 @@ import Location from "./Location";
 import ServiceRequest from "./ServiceRequest";
 import OfferedServices from "./OfferedServices";
 import ServiceFees from "./ServiceFees";
+import Comment from "./Comment";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -70,6 +71,30 @@ export default class User extends BaseEntity {
   @JoinColumn()
   recievedRequests: ServiceRequest[];
 
+  @OneToMany(() => Comment, comment => comment.from)
+  @JoinColumn()
+  createdComments: Comment[];
+
+  @OneToMany(() => Comment, comment => comment.to)
+  @JoinColumn()
+  recievedComments: Comment[];
+
+  @Column("bigint", { nullable: false })
+  createdAt: number;
+
+  @Column("bigint", { nullable: true })
+  updatedAt: number;
+
+  @BeforeInsert()
+  setCreatedAt() {
+    this.createdAt = Math.floor(Date.now() / 1000);
+  }
+
+  @BeforeUpdate()
+  setUpdatedAt() {
+    this.updatedAt = Math.floor(Date.now() / 1000);
+  }
+
   async setPassword(rawPassword: string) {
     const hash = await bcrypt.hash(rawPassword, 10);
     this.password = hash;
@@ -79,21 +104,5 @@ export default class User extends BaseEntity {
     const isMatch = await bcrypt.compare(rawPassword, this.password);
     if (!isMatch) throw new Error("Wrong password");
     return true;
-  }
-
-  @Column("bigint", { nullable: false })
-  createdAt: number;
-
-  @BeforeInsert()
-  setCreatedAt() {
-    this.createdAt = Math.floor(Date.now() / 1000);
-  }
-
-  @Column("bigint", { nullable: true })
-  updatedAt: number;
-
-  @BeforeUpdate()
-  setUpdatedAt() {
-    this.updatedAt = Math.floor(Date.now() / 1000);
   }
 }
