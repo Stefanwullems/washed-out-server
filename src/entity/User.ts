@@ -14,9 +14,10 @@ import * as bcrypt from "bcryptjs";
 import { MinLength, IsString, IsEmail } from "class-validator";
 import { Exclude } from "class-transformer";
 import Location from "./Location";
-import Item from "./Item";
 import ServiceRequest from "./ServiceRequest";
-import Services from "./Services";
+import OfferedServices from "./OfferedServices";
+import ServiceFees from "./ServiceFees";
+import Comment from "./Comment";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -43,8 +44,12 @@ export default class User extends BaseEntity {
   bio?: string;
 
   @JoinColumn()
-  @OneToOne(() => Services)
-  services: Services;
+  @OneToOne(() => OfferedServices)
+  services: OfferedServices;
+
+  @JoinColumn()
+  @OneToOne(() => ServiceFees)
+  serviceFees: ServiceFees;
 
   @IsString()
   @Column("text", {
@@ -58,10 +63,6 @@ export default class User extends BaseEntity {
   @JoinColumn()
   location: Location;
 
-  @OneToMany(() => Item, item => item.user)
-  @JoinColumn()
-  items: Item[];
-
   @OneToMany(() => ServiceRequest, serviceRequest => serviceRequest.from)
   @JoinColumn()
   createdRequests: ServiceRequest[];
@@ -69,6 +70,30 @@ export default class User extends BaseEntity {
   @OneToMany(() => ServiceRequest, serviceRequest => serviceRequest.to)
   @JoinColumn()
   recievedRequests: ServiceRequest[];
+
+  @OneToMany(() => Comment, comment => comment.from)
+  @JoinColumn()
+  createdComments: Comment[];
+
+  @OneToMany(() => Comment, comment => comment.to)
+  @JoinColumn()
+  recievedComments: Comment[];
+
+  @Column("bigint", { nullable: false })
+  createdAt: number;
+
+  @Column("bigint", { nullable: true })
+  updatedAt: number;
+
+  @BeforeInsert()
+  setCreatedAt() {
+    this.createdAt = Math.floor(Date.now() / 1000);
+  }
+
+  @BeforeUpdate()
+  setUpdatedAt() {
+    this.updatedAt = Math.floor(Date.now() / 1000);
+  }
 
   async setPassword(rawPassword: string) {
     const hash = await bcrypt.hash(rawPassword, 10);
@@ -79,21 +104,5 @@ export default class User extends BaseEntity {
     const isMatch = await bcrypt.compare(rawPassword, this.password);
     if (!isMatch) throw new Error("Wrong password");
     return true;
-  }
-
-  @Column("bigint", { nullable: false })
-  createdAt: number;
-
-  @BeforeInsert()
-  setCreatedAt() {
-    this.createdAt = Math.floor(Date.now() / 1000);
-  }
-
-  @Column("bigint", { nullable: true })
-  updatedAt: number;
-
-  @BeforeUpdate()
-  setUpdatedAt() {
-    this.updatedAt = Math.floor(Date.now() / 1000);
   }
 }

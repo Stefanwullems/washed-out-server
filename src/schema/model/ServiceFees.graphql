@@ -1,0 +1,20 @@
+type ServiceFees {
+  id: Int!
+  washing: Float!
+  drying: Float!
+  ironing: Float!
+  folding: Float!
+  delivery: Float!
+  pickup: Float!
+  base: Float!
+}
+
+input ServiceFeesInput {
+  washing: Float
+  drying: Float
+  ironing: Float
+  folding: Float
+  delivery: Float
+  pickup: Float
+  base: Float
+}

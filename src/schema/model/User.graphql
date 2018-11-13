@@ -6,9 +6,9 @@ type User {
   bio: String
   picture: String
   location: Location
-  items: [Item]
   createdRequests: [ServiceRequest]
   recievedRequests: [ServiceRequest]
   services: Services!
   token: String
+  serviceFees: ServiceFees
 }

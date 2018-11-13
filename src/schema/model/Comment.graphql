@@ -1,0 +1,7 @@
+type Comment {
+  id: Int!
+  from: User
+  to: User
+  content: String!
+  rating: Float
+}

@@ -1,8 +1,11 @@
 type ServiceRequest {
+  id: Int
   from: User
   to: User
   items: [Item]
   completed: Boolean
   paid: Boolean
   specifications: String
+  services: Services
+  additionalCharge: Float
 }

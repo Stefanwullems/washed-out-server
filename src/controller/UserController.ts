@@ -1,6 +1,7 @@
 import { Controller, Query, Mutation } from "vesper";
 import User from "../entity/User";
-import Services from "../entity/Services";
+import OfferedServices from "../entity/OfferedServices";
+import ServiceFees from "../entity/ServiceFees";
 
 @Controller()
 export default class UserController {
@@ -12,9 +13,10 @@ export default class UserController {
   @Mutation()
   async signUp(args) {
     const { password, ...rest } = args;
-    const services = await Services.create().save();
+    const services = await OfferedServices.create().save();
+    const serviceFees = await ServiceFees.create().save();
 
-    const entity = User.create({ ...rest, services });
+    const entity = User.create({ ...rest, services, serviceFees });
     await entity.setPassword(password);
     return entity.save();
   }
