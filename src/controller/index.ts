@@ -5,7 +5,9 @@ import LocationController from "./LocationController";
 import ServiceRequestController from "./ServiceRequestController";
 import ServiceFeesController from "./ServiceFeesController";
 import CommentController from "./CommentController";
+import RatingController from "./RatingController";
 export default [
+  RatingController,
   CommentController,
   ServiceFeesController,
   UserController,

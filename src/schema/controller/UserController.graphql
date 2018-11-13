@@ -1,5 +1,7 @@
 type Query {
   allUsers: [User]
+  getUser(userId: Int!): User
+  getFeed(userId: Int!): [User]
 }
 
 type Mutation {

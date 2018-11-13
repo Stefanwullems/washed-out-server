@@ -11,4 +11,5 @@ type User {
   services: Services!
   token: String
   serviceFees: ServiceFees
+  status: String!
 }

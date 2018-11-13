@@ -59,6 +59,9 @@ export default class User extends BaseEntity {
   })
   picture: string;
 
+  @Column("text", { nullable: false, default: "Available" })
+  status: string;
+
   @ManyToOne(() => Location, location => location.users)
   @JoinColumn()
   location: Location;
