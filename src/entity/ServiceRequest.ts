@@ -7,10 +7,13 @@ import {
   JoinTable,
   ManyToOne,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
+  OneToOne,
+  JoinColumn
 } from "typeorm";
 import Item from "./Item";
 import User from "./User";
+import RequestedServices from "./RequestedServices";
 
 @Entity()
 export default class ServiceRequest extends BaseEntity {
@@ -32,6 +35,9 @@ export default class ServiceRequest extends BaseEntity {
   @Column("text", { nullable: false, default: "no specifications" })
   specifications: string;
 
+  @Column("float", { nullable: false, default: 0 })
+  additionalCharge: number;
+
   @Column("boolean", { nullable: false, default: false })
   completed: boolean;
 
@@ -40,6 +46,10 @@ export default class ServiceRequest extends BaseEntity {
 
   @Column("bigint", { nullable: false })
   createdAt: number;
+
+  @OneToOne(() => RequestedServices)
+  @JoinColumn()
+  services: RequestedServices;
 
   @BeforeInsert()
   setCreatedAt() {

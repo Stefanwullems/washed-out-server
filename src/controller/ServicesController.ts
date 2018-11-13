@@ -1,16 +1,14 @@
 import { Controller, Mutation } from "vesper";
-import Services from "../entity/Services";
+import OfferedServices from "../entity/OfferedServices";
 
 @Controller()
 export default class ServicesController {
   @Mutation()
   async updateServices(args) {
-    const { id, ...servicesUpdate } = args;
+    const { id, services } = args;
 
-    const prevServices = await Services.findOne(id);
+    const prevServices = await OfferedServices.findOne(id);
 
-    const services = await Services.merge(prevServices, servicesUpdate).save();
-
-    return services;
+    return await OfferedServices.merge(prevServices, services).save();
   }
 }

@@ -4,5 +4,7 @@ type Mutation {
     toId: Int!
     items: [ItemInput!]!
     specifications: String
+    services: ServicesInput
+    additionalCharge: Float
   ): ServiceRequest
 }

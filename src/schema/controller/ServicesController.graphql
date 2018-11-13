@@ -1,8 +1,3 @@
 type Mutation {
-  updateServices(
-    id: Int!
-    washing: Boolean
-    drying: Boolean
-    ironing: Boolean
-  ): Services
+  updateServices(id: Int!, services: ServicesInput): Services
 }

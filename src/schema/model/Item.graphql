@@ -1,13 +1,10 @@
 type Item {
   id: Int!
   itemType: String!
-  material: String!
-  specifications: String
-  user: User!
+  count: Int
 }
 
 input ItemInput {
   itemType: String
-  material: String
-  specifications: String
+  count: Int
 }
