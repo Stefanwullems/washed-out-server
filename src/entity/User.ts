@@ -44,7 +44,7 @@ export default class User extends BaseEntity {
   bio?: string;
 
   @JoinColumn()
-  @OneToOne(() => OfferedServices)
+  @OneToOne(() => OfferedServices, { eager: true })
   services: OfferedServices;
 
   @JoinColumn()

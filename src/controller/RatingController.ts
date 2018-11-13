@@ -7,7 +7,9 @@ export default class UserController {
   @Query()
   async getRating({ userId }) {
     const user = await User.findOne(userId);
-    const [comments, amount] = await Comments.findAndCount({ where: { user } });
+    const [comments, amount] = await Comments.findAndCount({
+      where: { to: user }
+    });
     if (amount === 0) {
       return { rating: 2.5 };
     }
