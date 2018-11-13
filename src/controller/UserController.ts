@@ -2,6 +2,7 @@ import { Controller, Query, Mutation } from "vesper";
 import User from "../entity/User";
 import OfferedServices from "../entity/OfferedServices";
 import ServiceFees from "../entity/ServiceFees";
+import { Not } from "typeorm";
 
 @Controller()
 export default class UserController {
@@ -11,8 +12,18 @@ export default class UserController {
   }
 
   @Query()
-  getFeed({ userId }) {
-    return User.find();
+  async getFeed({ userId }) {
+    return (await User.find()).filter(
+      user =>
+        user.id !== userId &&
+        (user.services.washing ||
+          user.services.drying ||
+          user.services.ironing ||
+          user.services.folding ||
+          user.services.delivery ||
+          user.services.pickup) &&
+        user.status === "Available"
+    );
   }
 
   @Query()

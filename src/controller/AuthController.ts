@@ -10,7 +10,8 @@ export default class AuthController {
     const user = await User.findOne({ where: { email } });
     if (await user.passwordMatches(password)) {
       const token = jwt.sign({ id: user.id }, secret, { expiresIn: "1h" });
-      return token;
+
+      return { ...user, token };
     }
   }
 }
