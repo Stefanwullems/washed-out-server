@@ -8,6 +8,7 @@ import {
   BeforeUpdate
 } from "typeorm";
 import User from "./User";
+import ServiceRequest from "./ServiceRequest";
 
 @Entity()
 export default class Item extends BaseEntity {
@@ -19,4 +20,7 @@ export default class Item extends BaseEntity {
 
   @Column("int", { nullable: false })
   count: number;
+
+  @ManyToOne(() => ServiceRequest)
+  serviceRequest: ServiceRequest;
 }

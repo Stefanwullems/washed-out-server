@@ -3,7 +3,7 @@ import {
   Column,
   BaseEntity,
   PrimaryGeneratedColumn,
-  ManyToMany,
+  OneToMany,
   JoinTable,
   ManyToOne,
   BeforeInsert,
@@ -28,8 +28,8 @@ export default class ServiceRequest extends BaseEntity {
   @JoinTable()
   to: User;
 
-  @JoinTable()
-  @ManyToMany(() => Item)
+  @OneToMany(() => Item, item => item.serviceRequest)
+  @JoinColumn()
   items: Item[];
 
   @Column("text", { nullable: false, default: "no specifications" })

@@ -10,6 +10,16 @@ export default class UserController {
     return User.find();
   }
 
+  @Query()
+  getFeed({ userId }) {
+    return User.find();
+  }
+
+  @Query()
+  getUser({ userId }) {
+    return User.findOne(userId);
+  }
+
   @Mutation()
   async signUp(args) {
     const { password, ...rest } = args;
