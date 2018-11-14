@@ -1,8 +1,7 @@
-import { Controller, Query, Mutation } from "vesper";
+import { Controller, Query, Mutation, Authorized } from "vesper";
 import User from "../entity/User";
 import OfferedServices from "../entity/OfferedServices";
 import ServiceFees from "../entity/ServiceFees";
-import { Not } from "typeorm";
 
 @Controller()
 export default class UserController {

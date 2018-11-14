@@ -4,6 +4,10 @@ import controllers from "./controller";
 import entities from "./entity";
 import * as bodyparser from "body-parser";
 import { PubSub } from "graphql-subscriptions";
+import User from "./entity/User";
+import * as jwt from "jsonwebtoken";
+import CurrentUser from "./auth/currentUser";
+import { getManager } from "typeorm";
 
 const port: number = Number(process.env.PORT) || 4000;
 export const secret: string =
@@ -19,8 +23,30 @@ bootstrap({
   entities: entities,
   schemas: ["../**/*.graphql"],
   graphQLRoute: "/graphql",
-  setupContainer: container => container.set(PubSub, pubSub),
-  subscriptionAsyncIterator: triggers => pubSub.asyncIterator(triggers)
+  setupContainer: async (container, action) => {
+    // trivial implementation, used for demonstration purpose
+    const request = action.request; // user request, you can get http headers from it
+    console.log("hi", request.headers.authorization);
+    const user = await User.findOne({
+      where: {
+        token: request.headers.authorization
+      }
+    });
+    if (!user) return;
+    const currentUser = new CurrentUser(user.id);
+
+    container.set(CurrentUser, currentUser);
+
+    container.set(PubSub, pubSub);
+  },
+  subscriptionAsyncIterator: triggers => pubSub.asyncIterator(triggers),
+  authorizationChecker: (roles: string[], action) => {
+    console.log("heyk");
+    const currentUser = action.container.get(User);
+    if (currentUser.id === undefined) {
+      throw new Error("The current user doesn't set");
+    }
+  }
 })
   .then(() => {
     console.log(

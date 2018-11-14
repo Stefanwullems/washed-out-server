@@ -3,7 +3,7 @@ import {
   Column,
   BaseEntity,
   PrimaryGeneratedColumn,
-  JoinTable,
+  JoinColumn,
   ManyToOne,
   BeforeInsert,
   BeforeUpdate
@@ -17,11 +17,11 @@ export default class Comment extends BaseEntity {
   id?: number;
 
   @ManyToOne(() => User, user => user.createdRequests)
-  @JoinTable()
+  @JoinColumn()
   from: User;
 
   @ManyToOne(() => User, user => user.recievedRequests)
-  @JoinTable()
+  @JoinColumn()
   to: User;
 
   @Column("text", { nullable: false })

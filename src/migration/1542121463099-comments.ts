@@ -53,7 +53,7 @@ export class comments1542121463099 implements MigrationInterface {
         await createComment({
           fromId: 3,
           toId: 2,
-          content: "very quick and goog",
+          content: "very quick and good",
           rating: 5
         }),
         await createComment({
