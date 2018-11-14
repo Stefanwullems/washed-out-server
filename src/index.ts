@@ -1,10 +1,7 @@
 // src/index.js
-import * as jwt from "jsonwebtoken";
 import { bootstrap } from "vesper";
 import controllers from "./controller";
-import { getManager } from "typeorm";
 import entities from "./entity";
-import User from "./entity/User";
 import * as bodyparser from "body-parser";
 import { PubSub } from "graphql-subscriptions";
 

@@ -6,6 +6,7 @@ import ServiceRequestController from "./ServiceRequestController";
 import ServiceFeesController from "./ServiceFeesController";
 import CommentController from "./CommentController";
 import RatingController from "./RatingController";
+import MessageController from "./MessageController";
 export default [
   RatingController,
   CommentController,
@@ -14,5 +15,6 @@ export default [
   AuthController,
   ServicesController,
   LocationController,
-  ServiceRequestController
+  ServiceRequestController,
+  MessageController
 ];

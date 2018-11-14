@@ -18,6 +18,7 @@ import ServiceRequest from "./ServiceRequest";
 import OfferedServices from "./OfferedServices";
 import ServiceFees from "./ServiceFees";
 import Comment from "./Comment";
+import Message from "./Message";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -81,6 +82,14 @@ export default class User extends BaseEntity {
   @OneToMany(() => Comment, comment => comment.to)
   @JoinColumn()
   recievedComments: Comment[];
+
+  @OneToMany(() => Message, message => message.from)
+  @JoinColumn()
+  createdMessages: Message[];
+
+  @OneToMany(() => Message, message => message.to)
+  @JoinColumn()
+  recievedMessages: Message[];
 
   @Column("bigint", { nullable: false })
   createdAt: number;

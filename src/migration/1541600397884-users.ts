@@ -117,6 +117,23 @@ export class users1541600397884 implements MigrationInterface {
               delivery: 10,
               pickup: 0
             }
+          }),
+          createUser({
+            fullName: "q",
+            email: "q",
+            password: "q",
+            bio: "q",
+            status: "Available",
+            picture:
+              "https://ca.slack-edge.com/T0DK39WAJ-UCPKCEXQF-a51b351a955e-48",
+            locationInput: {
+              address: "Van Nijenrodeweg 560",
+              postalCode: "1082Hk",
+              city: "Amsterdam",
+              country: "the netherlands"
+            },
+            services: {},
+            serviceFees: {}
           })
         ])
       );
