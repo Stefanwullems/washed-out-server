@@ -3,4 +3,5 @@ type Message {
   from: User
   to: User
   content: String!
+  status: String
 }

@@ -5,8 +5,7 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
   ManyToOne,
-  BeforeInsert,
-  BeforeUpdate
+  BeforeInsert
 } from "typeorm";
 
 import User from "./User";

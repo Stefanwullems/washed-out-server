@@ -14,7 +14,3 @@ type Mutation {
     picture: String
   ): User
 }
-
-# type Subscription {
-#   messageSent(userId: Int): Message
-# }

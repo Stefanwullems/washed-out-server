@@ -1,0 +1,11 @@
+type Subscription {
+  messageSent(userId: Int): Message
+}
+
+type Mutation {
+  messageSave(fromId: Int!, toId: Int!, content: String!): Message
+}
+
+type Query {
+  getMessages(userId: Int!, otherId: Int!): [Message]
+}
