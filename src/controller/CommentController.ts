@@ -1,4 +1,4 @@
-import { Controller, Mutation } from "vesper";
+import { Controller, Mutation, Query } from "vesper";
 import User from "../entity/User";
 import Comment from "../entity/Comment";
 
@@ -6,7 +6,6 @@ import Comment from "../entity/Comment";
 export default class CommentController {
   @Mutation()
   async createComment(args) {
-    console.log(args);
     const { fromId, toId, ...rest } = args;
 
     return Comment.create({
@@ -14,5 +13,11 @@ export default class CommentController {
       to: await User.findOne(toId),
       ...rest
     }).save();
+  }
+
+  @Query()
+  async getComments({ userId }) {
+    const user = await User.findOne(userId);
+    return Comment.find({ where: { to: user } });
   }
 }

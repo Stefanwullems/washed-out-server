@@ -1,0 +1,6 @@
+type Message {
+  id: Int!
+  from: User
+  to: User
+  content: String!
+}
