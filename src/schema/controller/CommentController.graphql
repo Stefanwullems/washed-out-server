@@ -6,3 +6,7 @@ type Mutation {
     rating: Float
   ): Comment
 }
+
+type Query {
+  getComments(userId: Int!): [Comment]
+}
