@@ -67,7 +67,7 @@ export class users1541600397884 implements MigrationInterface {
             email: "amuru.codais@gmail.com",
             password: "password",
             bio: "Hi, I'm Sveta",
-            status: "Unavailable",
+            status: "Available",
             picture:
               "https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/p160x160/41141735_2207448662629870_1888814140177252352_n.jpg?_nc_cat=104&_nc_ht=scontent-amt2-1.xx&oh=20ffc02da9f7559a0f61f4a55f087b70&oe=5C818089",
             locationInput: {
@@ -119,13 +119,63 @@ export class users1541600397884 implements MigrationInterface {
             }
           }),
           createUser({
-            fullName: "q",
+            fullName: "Elon Musk",
+            email: "elonmusk@gmail.com",
+            password: "password",
+            bio: "The universe is probably a simulation",
+            status: "Available",
+            picture:
+              "https://pi.tedcdn.com/r/pe.tedcdn.com/images/ted/2534551796ee0a2638b462ce82e33b65091b1d42_1600x1200.jpg?w=1200",
+            locationInput: {
+              address: "leidseplein 25",
+              postalCode: "1017PS",
+              city: "amsterdam ",
+              country: "the netherlands"
+            },
+            services: {
+              washing: true,
+              drying: true,
+              ironing: true,
+              delivery: true,
+              pickup: true
+            },
+            serviceFees: {
+              ironing: 1.5,
+              drying: 2
+            }
+          }),
+          createUser({
+            fullName: "Ben Shapiro",
+            email: "benshapiro@gmail.com",
+            password: "password",
+            bio: "You just got DESTROYED",
+            status: "Available",
+            picture:
+              "https://yt3.ggpht.com/a-/AN66SAxUJ6LygIavxMfMhvDHyhI0gyA3m6rZoKfnzQ=s900-mo-c-c0xffffffff-rj-k-no",
+            locationInput: {
+              address: "rijksweg 496",
+              postalCode: "2071CW",
+              city: "santpoort-noord",
+              country: "the netherlands"
+            },
+            services: {
+              washing: true,
+              drying: true,
+              ironing: true
+            },
+            serviceFees: {
+              ironing: 1.5,
+              drying: 2
+            }
+          }),
+          createUser({
+            fullName: "Test",
             email: "q",
             password: "q",
             bio: "q",
             status: "Available",
             picture:
-              "https://ca.slack-edge.com/T0DK39WAJ-UCPKCEXQF-a51b351a955e-48",
+              "https://www.whittierfirstday.org/wp-content/uploads/default-user-image-e1501670968910.png",
             locationInput: {
               address: "Van Nijenrodeweg 560",
               postalCode: "1082Hk",

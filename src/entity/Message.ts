@@ -5,7 +5,8 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
   ManyToOne,
-  BeforeInsert
+  BeforeInsert,
+  JoinColumn
 } from "typeorm";
 
 import User from "./User";
@@ -16,11 +17,11 @@ export default class Message extends BaseEntity {
   id?: number;
 
   @ManyToOne(() => User, user => user.createdRequests)
-  @JoinTable()
+  @JoinColumn()
   from: User;
 
   @ManyToOne(() => User, user => user.recievedRequests)
-  @JoinTable()
+  @JoinColumn()
   to: User;
 
   @Column("text", { nullable: false })

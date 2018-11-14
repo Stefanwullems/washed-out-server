@@ -6,7 +6,11 @@ import User from "../entity/User";
 
 @Controller()
 export default class MessageController {
-  constructor(private entityManager: EntityManager, private pubSub: PubSub) {}
+  constructor(
+    private entityManager: EntityManager,
+    private pubSub: PubSub,
+    private User
+  ) {}
 
   @Subscription()
   messageSent({ messageSent }, args) {
@@ -44,5 +48,39 @@ export default class MessageController {
       if (curr.id > acc[acc.length - 1].id) return [...acc, curr];
       else return [curr, ...acc];
     }, []);
+  }
+
+  @Query()
+  async getChats({ userId }) {
+    const user = await User.findOne(userId);
+
+    const sentMessages = (await Message.find({
+      where: { from: user },
+      order: { createdAt: "DESC" },
+      relations: ["from", "to"]
+    })).map(message => ({ ...message, with: message.to.id }));
+
+    const recievedMessages = (await Message.find({
+      where: { to: user },
+      order: { createdAt: "DESC" },
+      relations: ["from", "to"]
+    })).map(message => ({ ...message, with: message.from.id }));
+
+    const allMessages = [...sentMessages, ...recievedMessages];
+
+    const chronologicalChat = allMessages.reduce((acc, curr, i) => {
+      if (i === 0) return [curr];
+      const arr = acc.filter(message => message.with === curr.with);
+      if (arr.length === 0) return [...acc, curr];
+      return acc;
+    }, []);
+
+    const users = await Promise.all(
+      chronologicalChat.map(message => {
+        return User.findOne(message.with);
+      })
+    );
+
+    return users;
   }
 }

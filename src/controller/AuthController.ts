@@ -9,9 +9,8 @@ export default class AuthController {
   async login({ email, password }) {
     const user = await User.findOne({ where: { email } });
     if (await user.passwordMatches(password)) {
-      const token = jwt.sign({ id: user.id }, secret, { expiresIn: "1h" });
-
-      return { ...user, token };
+      const token = jwt.sign({ id: user.id }, secret);
+      return User.merge(user, { token }).save();
     }
   }
 }
