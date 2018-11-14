@@ -6,10 +6,13 @@ import { getManager } from "typeorm";
 import entities from "./entity";
 import User from "./entity/User";
 import * as bodyparser from "body-parser";
+import { PubSub } from "graphql-subscriptions";
 
 const port: number = Number(process.env.PORT) || 4000;
 export const secret: string =
   process.env.JWT_SECRET || "9u8nnjksfdt98*(&*%T$#hsfjk";
+
+const pubSub = new PubSub();
 
 bootstrap({
   cors: true,
@@ -19,28 +22,8 @@ bootstrap({
   entities: entities,
   schemas: ["../**/*.graphql"],
   graphQLRoute: "/graphql",
-
-  setupContainer: async (container, action) => {
-    const request = action.request;
-    const token: string = (request.headers["token"] as string) || "";
-    if (token === "") {
-      return;
-    }
-
-    const entityManager = getManager();
-    const payload = jwt.verify(token, secret);
-    const currentUser = await entityManager.findOneOrFail(User, {
-      id: payload["id"]
-    });
-
-    container.set(User, currentUser);
-  },
-  authorizationChecker: (roles: string[], action) => {
-    const currentUser = action.container.get(User);
-    if (currentUser.id === undefined) {
-      throw new Error("The current user doesn't set");
-    }
-  }
+  setupContainer: container => container.set(PubSub, pubSub),
+  subscriptionAsyncIterator: triggers => pubSub.asyncIterator(triggers)
 })
   .then(() => {
     console.log(
