@@ -1,4 +1,4 @@
-import { Controller, Mutation } from "vesper";
+import { Controller, Mutation, Authorized } from "vesper";
 import User from "../entity/User";
 import Item from "../entity/Item";
 import ServiceRequest from "../entity/ServiceRequest";
@@ -6,6 +6,7 @@ import RequestedServices from "../entity/RequestedServices";
 
 @Controller()
 export default class ServiceRequestController {
+  @Authorized()
   @Mutation()
   async createServiceRequest(args) {
     const { fromId, toId, items, services, ...rest } = args;

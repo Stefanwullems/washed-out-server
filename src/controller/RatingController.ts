@@ -1,9 +1,10 @@
-import { Controller, Query, Mutation } from "vesper";
+import { Controller, Query, Authorized } from "vesper";
 import User from "../entity/User";
 import Comments from "../entity/Comment";
 
 @Controller()
 export default class UserController {
+  @Authorized()
   @Query()
   async getRating({ userId }) {
     const user = await User.findOne(userId);

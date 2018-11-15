@@ -1,8 +1,9 @@
-import { Controller, Mutation } from "vesper";
+import { Controller, Mutation, Authorized } from "vesper";
 import OfferedServices from "../entity/OfferedServices";
 
 @Controller()
 export default class ServicesController {
+  @Authorized()
   @Mutation()
   async updateServices(args) {
     const { id, services } = args;
