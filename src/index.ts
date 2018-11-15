@@ -35,7 +35,7 @@ bootstrap({
     if (!user) return;
     const currentUser = new CurrentUser(user.id);
 
-    container.set(CurrentUser, currentUser);
+    container.set(User, currentUser);
 
     container.set(PubSub, pubSub);
   },

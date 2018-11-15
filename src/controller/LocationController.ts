@@ -1,10 +1,11 @@
-import { Controller, Query, Mutation } from "vesper";
+import { Controller, Query, Mutation, Authorized } from "vesper";
 import User from "../entity/User";
 import Location from "../entity/Location";
 import geoLocation from "../scripts/geolocation";
 
 @Controller()
 export default class LocationController {
+  @Authorized()
   @Query()
   async getLocation(args) {
     const user = await User.findOne(args.userId);
@@ -12,6 +13,7 @@ export default class LocationController {
   }
 
   @Mutation()
+  @Authorized()
   async setLocation(args) {
     const { userId, id, ...rest } = args;
 

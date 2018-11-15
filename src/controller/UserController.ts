@@ -5,11 +5,13 @@ import ServiceFees from "../entity/ServiceFees";
 
 @Controller()
 export default class UserController {
+  @Authorized()
   @Query()
   allUsers() {
     return User.find();
   }
 
+  @Authorized()
   @Query()
   async getFeed({ userId }) {
     return (await User.find()).filter(
@@ -25,6 +27,7 @@ export default class UserController {
     );
   }
 
+  @Authorized()
   @Query()
   getUser({ userId }) {
     return User.findOne(userId);
@@ -41,6 +44,7 @@ export default class UserController {
     return entity.save();
   }
 
+  @Authorized()
   @Mutation()
   async updateProfile(args) {
     const { userId, ...update } = args;

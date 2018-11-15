@@ -1,4 +1,4 @@
-import { Controller, Subscription, Mutation, Query } from "vesper";
+import { Controller, Subscription, Mutation, Query, Authorized } from "vesper";
 import { EntityManager } from "typeorm";
 import { PubSub } from "graphql-subscriptions";
 import Message from "../entity/Message";
@@ -13,12 +13,14 @@ export default class MessageController {
   ) {}
 
   @Subscription()
+  @Authorized()
   messageSent({ messageSent }, args) {
-    console.log("messageSent", messageSent, "userId", "args");
-    return messageSent.receiver === args.userId;
+    console.log("messageSent", messageSent, "userId", args.userId);
+    return messageSent.receiver === User;
   }
 
   @Mutation()
+  @Authorized()
   async messageSave(args) {
     const { fromId, toId, content } = args;
     const from = await User.findOne(fromId);
@@ -33,6 +35,7 @@ export default class MessageController {
   }
 
   @Query()
+  @Authorized()
   async getMessages({ userId, otherId }) {
     const user = await User.findOne(userId);
     const other = await User.findOne(otherId);
@@ -51,6 +54,7 @@ export default class MessageController {
   }
 
   @Query()
+  @Authorized()
   async getChats({ userId }) {
     const user = await User.findOne(userId);
 
